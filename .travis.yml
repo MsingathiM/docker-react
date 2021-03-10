@@ -1,0 +1,12 @@
+language: generic
+
+sudo: required
+# travis auto installs docker in container
+services:
+  - docker
+# some setup
+before_install:
+  - docker build -t msitest/docker-react -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true msitest/docker-react npm run test
